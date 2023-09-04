@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import moviepy.editor as mp
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 @app.get('/')
@@ -35,7 +35,7 @@ def process():
 
     file_name = secure_filename(vid_file.filename)
     extension = file_name.rsplit('.')[-1].lower()
-    destination = os.path.join(app.config['UPLOAD_FOLDER_VIDEO'], file_name)
+    destination = os.path.join(os.path.dirname(__file__), 'static', 'videos', file_name)
     vid_file.save(destination)
 
     print("file saved")
@@ -50,7 +50,7 @@ def process():
     # save audio file
 
     audio_p = file_name.removesuffix(extension) + 'mp3'
-    audio_path = os.path.join(app.config['UPLOAD_FOLDER_AUDIO'], audio_p)
+    audio_path = os.path.join(os.path.dirname(__file__), 'static', 'audio', audio_p)
 
     print(audio_path)
 
@@ -88,7 +88,7 @@ def create_download(text):
         create_download("some meaningful text sample")
     """
     f_name = random_file_name(".txt")
-    f_path =  os.path.join(app.config['UPLOAD_FOLDER_TEXT'], f_name)
+    f_path = os.path.join(os.path.dirname(__file__), 'static', 'transcriptions', f_name)
     with open(f_path, 'w') as f:
         f.write(text)
 

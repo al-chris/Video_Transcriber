@@ -16,9 +16,9 @@
         <!-- The custom file input -->
         <label for="fileToUpload" class="custom-file-label">
             <i class="fas fa-upload"></i> <!-- Icon for the file input label -->
-            Select a file (max file size: 16MB)
+            <span id="selectedFileName">Select a file (max file size: 20MB)</span>
         </label>
-        <input type="file" name="fileToUpload" id="fileToUpload" accept=".mov, .mp4, .avi, .mkv, .webm">
+        <input type="file" name="fileToUpload" id="fileToUpload" accept=".mov, .mp4, .avi, .mkv, .webm" required class="custom-file-input" onchange="updateFileName()">
         <br>
         <br>
         <!-- <input type="button" value="Transcribe" onclick="uploadFile()"> -->

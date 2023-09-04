@@ -4,7 +4,7 @@ function showSpinner() {
 
 function uploadFile() {
     const fileInput = document.getElementById("fileToUpload");
-    const maxFileSize = 16 * 1024 * 1024; // 16MB in bytes
+    const maxFileSize = 20 * 1024 * 1024; // 16MB in bytes
 
     if (fileInput.files.length === 0) {
         alert("Please select a file.");
@@ -14,7 +14,7 @@ function uploadFile() {
     const selectedFile = fileInput.files[0];
 
     if (selectedFile.size > maxFileSize) {
-        alert("File size exceeds the 16MB limit.");
+        alert("File size exceeds the 20MB limit.");
         return;
     }
 
@@ -79,4 +79,10 @@ function downloadTextFile() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+function updateFileName() {
+    const fileInput = document.getElementById("fileToUpload");
+    const selectedFileName = document.getElementById("selectedFileName");
+    selectedFileName.textContent = fileInput.files[0].name;
 }

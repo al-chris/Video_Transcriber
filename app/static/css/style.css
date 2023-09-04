@@ -209,3 +209,30 @@ body.dark-mode .custom-file-label {
     background-color: #555;
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
+
+/* Responsive styles for screens narrower than 768px (typical mobile phone width) */
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens here */
+    body {
+        font-size: 14px; /* Adjust font size for better readability on small screens */
+        padding: 20px;
+    }
+
+    .custom-file-input {
+        font-size: 14px; /* Adjust font size for the file input button */
+    }
+
+    .custom-file-label {
+        font-size: 14px; /* Adjust font size for the file input label */
+    }
+
+    /* Adjust button styles for smaller screens */
+    button {
+        padding: 8px; /* Reduce button padding for smaller screens */
+    }
+
+    /* Adjust icon size for smaller screens */
+    button i {
+        font-size: 16px;
+    }
+}
