@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1>Video Transcriber</h1>
+    <p>Select a video to upload:</p>
+    
+    <form action="{{url_for('process')}}" method="post" enctype="multipart/form-data">
+        <!-- The custom file input -->
+        <label for="fileToUpload" class="custom-file-label">
+            <i class="fas fa-upload"></i> <!-- Icon for the file input label -->
+            Select a file (max file size: 16MB)
+        </label>
+        <input type="file" name="fileToUpload" id="fileToUpload" accept=".mov, .mp4, .avi, .mkv, .webm">
+        <br>
+        <br>
+        <!-- <input type="button" value="Transcribe" onclick="uploadFile()"> -->
+        <button type="button" id="submit-btn" onclick="uploadFile()">
+            <i class="fa-regular fa-file-lines"></i>
+            Transcribe
+        </button>
+        <div class="spinner" id="spinner"></div>
+    </form>
+    <div class="list-container">
+        <h2>Summary:</h2>
+
+        <p id="summary">Sample text...</p>
+    </div>
+
+    <button id="toggleDarkMode" onclick="toggleDarkMode()">
+        <i class="fas fa-adjust"></i>
+    </button>
+
+    <textarea id="textToCopy" style="display: none;">This is the text to copy to the clipboard.</textarea>
+
+    <!-- <button id="copyToClipboardBtn" style="display: none;" onclick="copyToClipboard()">
+        <i class="far fa-copy"></i> 
+        Copy the full transcription
+    </button> -->
+
+    <button id="downloadFileBtn" style="display: none;" onclick="downloadTextFile()">
+        <i class="fas fa-file-download"></i> <!-- Icon for the download file button -->
+        Download the full transcription Text File
+    </button>
+
+
+</body>
+</html>
