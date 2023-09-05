@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import moviepy.editor as mp
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 @app.get('/')
@@ -16,6 +16,11 @@ def index():
     """
     renders the home page"""
     return render_template("index.html")
+
+@app.get('/audio_page')
+def audio_page():
+    """ renders the audio page"""
+    return render_template("audio.html")
 
 @app.post('/process')
 def process():
@@ -103,3 +108,52 @@ def random_file_name(ext):
     """
     N = 8
     return ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=N)) + ext
+
+
+
+@app.post('/audio')
+def audio():
+
+    """
+        This function:
+            1. Extracts the audio from the form
+            2. Transcribes the audio
+            3. Summarizes the text
+
+    """
+
+    aud_file = request.files["fileToUpload"]
+
+    print("file found")
+
+    file_name = secure_filename(aud_file.filename)
+    extension = file_name.rsplit('.')[-1].lower()
+    destination = os.path.join(os.path.dirname(__file__), 'static', 'audio', file_name)
+    aud_file.save(destination)
+
+    print("file saved")
+    print(destination)
+    print(extension)
+
+
+    # Open the audio file
+    audio_file = open(destination, "rb")
+
+    # transcribe using audio_file
+    audio_response = openai.Audio.transcribe("whisper-1", audio_file)
+
+    transcript = audio_response["text"]
+
+    print(transcript)
+
+    # Create a request to the API to identify the language spoken
+    chat_response = openai.Completion.create(
+        model = "text-davinci-003",
+        prompt = "Summarize the following: \n" + transcript
+    )
+    print(chat_response["choices"][0]["text"])
+
+    # create_download(transcript)
+
+
+    return make_response(jsonify([chat_response["choices"][0]["text"], transcript]), 200)
