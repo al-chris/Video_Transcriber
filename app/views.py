@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import moviepy.editor as mp
 import openai
 
-openai.api_key = "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"
+openai.api_key = "" # OpenAI API key
 
 
 @app.get('/')
